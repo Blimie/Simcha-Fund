@@ -1,0 +1,141 @@
+﻿@using _180423_SimchaFund.Data
+@using _180423_SimchaFund.Models
+@model ContributorsViewModel
+
+<h1 style="margin-left: 500px">Contributors</h1>
+
+<div class="row header">
+    <div class="col-md-2">
+        <button class="btn btn-danger" id="add-contributor">New Contributor</button>
+    </div>
+    <div class="col-md-4 col-lg-offset-3">
+        <input id="searchInput" type="text" class="input-sm" placeholder="Search...">
+        <button class="btn btn-danger" id="clear">Clear</button>
+    </div>
+    <div class="col-md-3">
+        <h3>Total: @Model.TotalBalance.ToString("C")</h3>
+    </div>
+</div>
+<table class="table table-bordered table-striped" style="margin-top: 60px">
+    <tr>
+        <th>Deposit</th>
+        <th>Name</th>
+        <th>Cell</th>
+        <th>Balance</th>
+        <th>Actions</th>
+    </tr>
+    <tbody id="Table">
+        @foreach (Contributor c in Model.Contributors)
+        {
+            <tr>
+                <td><button class="btn btn-primary deposit" data-contributor-id="@c.Id">Deposit</button></td>
+                <td>@c.FirstName @c.LastName</td>
+                <td>@c.CellNumber</td>
+                <td>@c.Balance.ToString("C")</td>
+                <td>
+                    <a class="btn btn-primary" href="/home/history?contributorId=@c.Id">Show History</a>
+                    <button class="btn btn-danger edit" 
+                            data-contributor-id="@c.Id" data-first-name="@c.FirstName"
+                            data-last-name="@c.LastName" data-cell-number="@c.CellNumber" 
+                            data-date-created="@c.DateCreated.ToString("yyyy-MM-dd")">
+                        Edit
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="add-contributor-modal">
+    <form method="post" action="/home/addcontributor">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">New Contributor</h4>
+                </div>
+                <div class="modal-body">
+                    First Name
+                    <input type="text" id="first-name" class="form-control" name="firstName" placeholder="First Name" />
+                    <br />
+                    Last Name
+                    <input type="text" id="last-name" class="form-control" name="lastName" placeholder="Last Name" />
+                    <br />
+                    Cell Number
+                    <input type="text" id="cell-number" class="form-control" name="cellnumber" placeholder="Cell Number" />
+                    <br />
+                    Initial Deposit
+                    <input type="text" id="initial-deposit" class="form-control" name="initialAmount" placeholder="Initial Deposit" />
+                    <br />
+                    Date
+                    <input type="date" id="date" class="form-control" name="DateCreated" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="edit-modal">
+    <form method="post" action="/home/updatecontributor">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="contributor-id-hidden" name="id" />
+                    First Name
+                    <input type="text" id="firstName" class="form-control" name="firstName" placeholder="First Name" />
+                    <br />
+                    Last Name
+                    <input type="text" id="lastName" class="form-control" name="lastName" placeholder="Last Name" />
+                    <br />
+                    Cell Number
+                    <input type="text" id="cellNumber" class="form-control" name="cellnumber" placeholder="Cell Number" />
+                    <br />
+                    Date Created
+                    <input type="date" id="dateCreated" class="form-control" name="DateCreated" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="deposit-modal">
+    <form method="post" action="/home/deposit">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Deposit</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="deposit-contributor-id-hidden" name="contributorid" />
+                    Amount
+                    <input type="text" class="form-control" name="amount" placeholder="Amount" />
+                    <br />
+                    Date
+                    <input type="date" id="date" class="form-control" name="date" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section scripts
+{
+    <script src="/Scripts/contributors.js"></script>
+}

@@ -1,0 +1,45 @@
+﻿@using _180423_SimchaFund.Data
+@using _180423_SimchaFund.Models
+@model ContributionsViewModel
+
+
+<h1 style="margin-left: 200px">Contributors for the @Model.Simcha.Name simcha</h1>
+<div class="col-md-8 col-lg-offset-4">
+    <input id="searchInput" type="text" class="input-sm" placeholder="Search...">
+    <button class="btn btn-danger" id="clear">Clear</button>
+</div>
+
+<form action="/home/addcontributions" method="post">
+    <table class="table table-bordered table-striped" style="margin-top: 60px">
+        <tr>
+            <th>Contribute</th>
+            <th>Name</th>
+            <th>Balance</th>
+            <th>Amount</th>
+        </tr>
+        @{int counter = 0;}
+        <tbody id="Table">
+            @foreach (ContributorContribution c in Model.Contributors)
+            {
+                <tr>
+                    <td><input type="checkbox" name="contributions[@counter].Contribute" value="true" @(c.Contribute ? "Checked" : "") /></td>
+                    <td>@c.ContributorWithBalance.FirstName @c.ContributorWithBalance.LastName</td>
+                    <td>@c.ContributorWithBalance.Balance.ToString("C")</td>
+                    <td>
+                        <input type="text" value="@(c.Amount.HasValue  ? c.Amount : 5)" class="input-sm form-control" name="contributions[@counter].Amount" />
+                        <input type="hidden" value="@c.ContributorWithBalance.Id" name="contributions[@counter].ContributorId" />
+                    </td>
+                </tr>
+                counter++;
+            }
+        </tbody>
+    </table>
+
+    <input type="hidden" value="@Model.Simcha.Id" name="simchaId" />
+    <button class="btn btn-danger">Update</button>
+</form>
+
+@section scripts
+    {
+    <script src="/Scripts/contributions.js"></script>
+}

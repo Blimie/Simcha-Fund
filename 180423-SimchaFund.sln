@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "180423-SimchaFund", "180423-SimchaFund\180423-SimchaFund.csproj", "{810373B6-D59D-4525-9BE5-99C3AF39ECE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "180423-SimchaFund.Data", "180423-SimchaFund.Data\180423-SimchaFund.Data.csproj", "{3849B924-C311-4A59-9774-EE3C06A09619}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{810373B6-D59D-4525-9BE5-99C3AF39ECE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{810373B6-D59D-4525-9BE5-99C3AF39ECE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{810373B6-D59D-4525-9BE5-99C3AF39ECE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{810373B6-D59D-4525-9BE5-99C3AF39ECE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3849B924-C311-4A59-9774-EE3C06A09619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3849B924-C311-4A59-9774-EE3C06A09619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3849B924-C311-4A59-9774-EE3C06A09619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3849B924-C311-4A59-9774-EE3C06A09619}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54D30490-4C68-418D-980D-94CC7FB54EF6}
+	EndGlobalSection
+EndGlobal

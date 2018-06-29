@@ -1,0 +1,23 @@
+﻿@using _180423_SimchaFund.Data
+@using _180423_SimchaFund.Models
+@model HistoryViewModel
+
+<h1 style="margin-left: 400px; margin-top: 40px">History for @Model.Contributor.FirstName @Model.Contributor.LastName</h1>
+<h3 style="margin-left: 460px">Current Balance: @Model.Contributor.Balance.ToString("C")</h3>
+
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th>Action</th>
+        <th>Date</th>
+        <th>Amount</th>
+    </tr>
+    @foreach (Transaction t in Model.Transactions)
+    {
+        <tr>
+            <td>@t.Action</td>
+            <td>@t.Date.ToLongDateString()</td>
+            <td>@t.Amount.Substring(0, t.Amount.Length-2)</td>
+        </tr>
+    }
+</table>
+<a style="margin-left: 460px" class="btn btn-danger btn-lg" href="/home/contributors">Back to Contributors</a>

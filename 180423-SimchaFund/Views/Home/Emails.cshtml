@@ -1,0 +1,9 @@
+﻿@using _180423_SimchaFund.Data
+@using _180423_SimchaFund.Models
+@model EmailsViewModel
+
+<h1>Contributor list for the @Model.Simcha.Name simcha</h1>
+@foreach(string name in Model.Names)
+{
+    <h3>@name</h3>
+}

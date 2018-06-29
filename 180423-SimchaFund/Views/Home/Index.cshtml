@@ -1,0 +1,56 @@
+﻿@using _180423_SimchaFund.Data
+@using _180423_SimchaFund.Models
+@model IndexViewModel     
+
+<h1 style="margin-left: 500px">Simchas</h1>
+<button style="margin-left: 80px" class="btn btn-danger" id="add-simcha">New Simcha</button>
+<table class="table table-bordered table-striped" style="margin-top: 60px">
+    <tr>
+        <th>Contributions</th>
+        <th>Simcha Name</th>
+        <th>Contributor Count</th>
+        <th>Total</th>
+        <th>Date</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (SimchaWithCountAndTotal s in Model.Simchas)
+    {
+        <tr>
+            <td><a class="btn btn-primary" href="/home/contributions?simchaId=@s.Id">Contributions</a></td>
+            <td>@s.Name</td>
+            <td>@s.Count/@Model.TotalContributorCount</td>
+            <td>@s.Total.ToString("C")</td>
+            <td>@s.Date.ToShortDateString()</td>
+            <td><a class="btn btn-danger" href="/home/emails?simchaId=@s.Id">Email Organizer</a></td>
+        </tr>
+    }
+</table>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="add-simcha-modal">
+    <form method="post" action="/home/addsimcha">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">New Simcha</h4>
+                </div>
+                <div class="modal-body">
+                    Simcha Name
+                    <input type="text" id="simcha-name" class="form-control" name="name" placeholder="Simcha Name" />
+                    <br />
+                    Date
+                    <input type="date" id="date" class="form-control" name="date" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts
+{
+    <script src="/Scripts/index.js"></script>
+}
